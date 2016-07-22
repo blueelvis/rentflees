@@ -15,8 +15,22 @@ AutoForm.hooks({
   	onSubmit: function (insertDoc, updateDoc, currentDoc) {
   		this.event.preventDefault()
       // Inserting the coordinates
+      insertDoc.loc = [parseFloat(longitude),parseFloat(latitude)];
+      console.log(insertDoc);
+      var result = Listings.find( { loc : { $near : [longitude,latitude] } } ).fetch();
+      console.log(result);
+      i = 1;
+      result.forEach(function print(obj) {
+        while(i < 6)
+        {
+          console.log("Nearby Entry : " + i++);
+          console.log(obj.loc); 
+        }
+      });
+      /*
       insertDoc.XCoordinate = latitude;
       insertDoc.YCoordinate = longitude;
+      */
   		if(imageName != null){
   			insertDoc.image = imageName;
   			Listings.insert(insertDoc);

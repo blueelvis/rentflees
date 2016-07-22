@@ -1,6 +1,6 @@
 Template.listings.helpers({
   listingsCollection() {
-    console.log(Listings.find({}, { sort: { createdAt:  -1} }) );
+    //console.log(Listings.find({}, { sort: { createdAt:  -1} }) );
     return Listings.find({}, { sort: { createdAt:  -1} }) ;
   }
 });

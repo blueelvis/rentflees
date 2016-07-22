@@ -147,7 +147,7 @@ Listings.attachSchema(new SimpleSchema({
 			type: "hidden"
 		}
 	},
-
+/*
 	XCoordinate: {
   	label: "X - Coordinate",
 	optional: true,
@@ -166,7 +166,17 @@ Listings.attachSchema(new SimpleSchema({
 			type: "hidden"
 		}
   }
+*/
 
+  loc: {
+  	label: "Location",
+  	optional: true,
+    decimal: true,
+  	type: [Number],
+  		autoform: {
+			type: "hidden"
+		}
+  },
 
 }));
 
