@@ -32,7 +32,8 @@ Template.map.onCreated(function() {
 
     marker = new google.maps.Marker(
       {
-        position: {lat: -37.8136, lng: 144.9631}, map: map.instance, draggable: true });
+        position: {lat: -37.8136, lng: 144.9631}, map: map.instance, draggable: true
+      });
 
     var input = document.getElementById('pac-input');
     var searchBox = new google.maps.places.SearchBox(input);
@@ -45,6 +46,30 @@ Template.map.onCreated(function() {
       if (places.length == 1){
         map.instance.panTo(places[0].geometry.location);
         marker.setPosition(places[0].geometry.location);
+      console.log(places[0].geometry.location.lat());
+      longitude = places[0].geometry.location.lat();
+      latitude = places[0].geometry.location.lng();
+    //coords = new google.maps.LatLng(latitude,longitude);
+    coords = {lat: latitude, lng: longitude};
+      console.log(places[0].geometry.location.lng());
+      //Implement Search
+       var result = Listings.find( { loc : { $near : [longitude,latitude] } } ).fetch();
+      console.log(result);
+      i = 1;
+      result.forEach(function print(obj) {
+        while(i < 6)
+        {
+          console.log("Nearby Entry : " + i++);
+          console.log(obj); 
+          //marker.setPosition(coords);
+
+
+
+        }
+      });
+
+
+
       }
     });
 
