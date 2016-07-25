@@ -53,20 +53,35 @@ Template.map.onCreated(function() {
     coords = {lat: latitude, lng: longitude};
       console.log(places[0].geometry.location.lng());
       //Implement Search
-       var result = Listings.find( { loc : { $near : [longitude,latitude] } } ).fetch();
-      console.log(result);
-      i = 1;
-      result.forEach(function print(obj) {
-        while(i < 6)
-        {
-          console.log("Nearby Entry : " + i++);
-          console.log(obj); 
-          //marker.setPosition(coords);
-
-
-
-        }
+      var result = null;
+       //result = Listings.find( { loc : { $near : [longitude,latitude] } } ).fetch();
+       result = Listings.find(
+       { loc: 
+        { $geoWithin: 
+          { 
+            $center :  [ [longitude,latitude], 10 ]  
+          } 
+        } 
       });
+       /*
+       db.places.find( { loc: { $geoWithin :
+                          { $center : [ [-74, 40.74 ] , 10 ]
+                } } } )
+      */
+       if(result)
+       {
+        console.log(result);
+        i = 1;
+        result.forEach(function print(obj) {
+          while(i < 6)
+          {
+            console.log("Nearby Entry : " + i++);
+            console.log(obj); 
+            //marker.setPosition(coords);
+          }
+        });
+       }
+     
 
 
 
