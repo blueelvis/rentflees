@@ -15,7 +15,7 @@ Template.loginForm.events({
         {
         	if(error){
 				//print.innerHTML = error.reason;
-                alert(error.reason);
+                alert("The details entered are incorrect. Please make sure you are registered with us.");
 			}
             else
 			{
